@@ -64,15 +64,11 @@ class CartController {
 
       const cart = await Cart.findOne({ user: req.userId });
 
-      if (!cart) {
-        return res.status(404).json({ message: "Корзина не найдена" });
-      }
-
       cart.items = cart.items.filter(item => item.product.toString() !== productId);
 
       await cart.save();
 
-      res.json(cart);
+      res.json({ message: "Манга удалена из корзины" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

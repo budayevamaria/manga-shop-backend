@@ -3,7 +3,7 @@ import { Product } from "../models/Product.js";
 class ProductController {
   async create(req, res) {
     try {
-      const { title, author, chapters, volumes, status, cost } = req.body;
+      const { title, author, chapters, volumes, status, cost, image } = req.body;
       const newProduct = await new Product({
         title,
         author,
@@ -51,7 +51,7 @@ class ProductController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { title, author, chapters, volumes, status, cost } = req.body;
+      const { title, author, chapters, volumes, status, cost, image } = req.body;
 
       const updatedProduct = await Product.findByIdAndUpdate(
         id,
