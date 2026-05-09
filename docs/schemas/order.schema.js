@@ -24,11 +24,20 @@ const orderSchema = {
           type: "number",
           example: 12.9, //?
         },
+        status: {
+          type: "string",
+        },
       },
     },
     totalPrice: {
       type: "number",
       example: 12.9,
+    },
+
+    status: {
+      type: "string",
+      enum: ["created", "paid", "shipped", "delivered"],
+      example: "created",
     },
   },
 };

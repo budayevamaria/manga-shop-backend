@@ -33,15 +33,18 @@ const productPaths = {
           "application/json": {
             schema: {
               type: "object",
-              required: ["title", "author", "chapters", "volumes", "cost", "image"],
+              required: ["title", "authors", "chapters", "volumes", "price", "image"],
               properties: {
                 title: {
                   type: "string",
                   example: "One Piece",
                 },
-                author: {
-                  type: "string",
-                  example: "Oda, Eiichiro",
+                authors: {
+                  type: "array",
+                  items: {
+                    type: "string",
+                  },
+                  example: ["Oda, Eiichiro"],
                 },
                 chapters: {
                   type: "number",
@@ -55,7 +58,7 @@ const productPaths = {
                   type: "string",
                   example: "finished",
                 },
-                cost: {
+                price: {
                   type: "number",
                   example: 12.9,
                 },
@@ -120,6 +123,7 @@ const productPaths = {
     patch: {
       summary: "Update product",
       tags: ["Products"],
+      security: [{ BearerAuth: [] }],
       parameters: [
         {
           name: "id",
@@ -137,15 +141,18 @@ const productPaths = {
           "application/json": {
             schema: {
               type: "object",
-              required: ["title", "author", "chapters", "volumes", "cost", "image"],
+              required: ["title", "authors", "chapters", "volumes", "price", "image"],
               properties: {
                 title: {
                   type: "string",
                   example: "One Piece",
                 },
-                author: {
-                  type: "string",
-                  example: "Oda, Eiichiro",
+                authors: {
+                  type: "array",
+                  items: {
+                    type: "string",
+                  },
+                  example: ["Oda, Eiichiro"],
                 },
                 chapters: {
                   type: "number",
@@ -159,7 +166,7 @@ const productPaths = {
                   type: "string",
                   example: "finished",
                 },
-                cost: {
+                price: {
                   type: "number",
                   example: 12.9,
                 },
@@ -194,6 +201,7 @@ const productPaths = {
     delete: {
       summary: "Delete product",
       tags: ["Products"],
+      security: [{ BearerAuth: [] }],
       parameters: [
         {
           name: "id",

@@ -89,6 +89,82 @@ const orderPaths = {
         },
       },
     },
+    patch: {
+      summary: "Update order status",
+      tags: ["Orders"],
+      security: [{ BearerAuth: [] }],
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+          required: true,
+          schema: { type: "string" },
+        },
+      ],
+      requestBody: {
+        required: true,
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              required: ["status"],
+              properties: {
+                status: {
+                  type: "string",
+                  enum: ["created", "paid", "shipped", "delivered"],
+                  example: "shipped",
+                },
+              },
+            },
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: "Status updated",
+        },
+        404: {
+          description: "Not found",
+        },
+        500: {
+          description: "Internal server error",
+        },
+      },
+    },
+    delete: {
+      summary: "Delete order",
+      tags: ["Orders"],
+      security: [{ BearerAuth: [] }],
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+          required: true,
+          description: "Order id (ObjectId)",
+          schema: {
+            type: "string",
+          },
+        },
+      ],
+      responses: {
+        200: {
+          description: "Order deleted",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Order",
+              },
+            },
+          },
+        },
+        404: {
+          description: "Not found",
+        },
+        500: {
+          description: "Internal server error",
+        },
+      },
+    },
   },
 };
 

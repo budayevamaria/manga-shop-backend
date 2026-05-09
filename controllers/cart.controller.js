@@ -58,6 +58,33 @@ class CartController {
     }
   }
 
+  async updateQuantity(req, res) {
+    try {
+      const { productId } = req.params;
+      const { quantity } = req.body;
+
+      const cart = await Cart.findOne({ user: req.userId });
+
+      if (!cart) {
+        return res.status(404).json({ message: "Корзина не найдена" });
+      }
+
+      const item = cart.items.find(item => item.product.toString() === productId);
+
+      if (!item) {
+        return res.status(404).json({ message: "Данной манги нет корзине" });
+      }
+
+      item.quantity = quantity;
+
+      await cart.save();
+
+      res.json({ message: `Количество изменено на ${item.quantity}` });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
   async removeItem(req, res) {
     try {
       const { productId } = req.params;

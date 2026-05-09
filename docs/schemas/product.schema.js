@@ -9,8 +9,11 @@ const productSchema = {
     title: {
       type: "string",
     },
-    author: {
-      type: "string",
+    authors: {
+      type: "array",
+      items: {
+        type: "string",
+      },
     },
     chapters: {
       type: "number",
@@ -22,7 +25,7 @@ const productSchema = {
       type: "string",
       example: "Finished",
     },
-    cost: {
+    price: {
       type: "number",
     },
     image: {

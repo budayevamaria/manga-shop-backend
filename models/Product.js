@@ -6,8 +6,8 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  author: {
-    type: String,
+  authors: {
+    type: [String],
     required: true,
     trim: true,
   },
@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  cost: {
+  price: {
     type: Number,
     required: true,
     min: 0,

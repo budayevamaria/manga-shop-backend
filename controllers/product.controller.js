@@ -3,14 +3,14 @@ import { Product } from "../models/Product.js";
 class ProductController {
   async create(req, res) {
     try {
-      const { title, author, chapters, volumes, status, cost, image } = req.body;
+      const { title, authors, chapters, volumes, status, price, image } = req.body;
       const newProduct = await new Product({
         title,
-        author,
+        authors,
         chapters,
         volumes,
         status,
-        cost,
+        price,
         image,
       }).save();
 
@@ -51,11 +51,11 @@ class ProductController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { title, author, chapters, volumes, status, cost, image } = req.body;
+      const { title, authors, chapters, volumes, status, price, image } = req.body;
 
       const updatedProduct = await Product.findByIdAndUpdate(
         id,
-        { title, author, chapters, volumes, status, cost, image },
+        { title, authors, chapters, volumes, status, price, image },
         { new: true }
       );
 

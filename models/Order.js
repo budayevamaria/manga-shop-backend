@@ -32,6 +32,13 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+
+  status: {
+    type: String,
+    required: true,
+    enum: ["created", "paid", "shipped", "delivered"],
+    default: "created",
+  },
 });
 
 export const Order = mongoose.model("Order", orderSchema);

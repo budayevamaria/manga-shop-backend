@@ -13,7 +13,7 @@ class OrderController {
       const orderItems = cart.items.map(item => ({
         product: item.product._id,
         quantity: item.quantity,
-        price: item.product.cost,
+        price: item.product.price,
       }));
 
       const totalPrice = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -56,6 +56,38 @@ class OrderController {
       }
 
       return res.json(order);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  async updateStatus(req, res) {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+
+      const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
+
+      if (!order) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+
+      res.json({ message: "Статус заказа обновлен" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+      const deletedOrder = await Order.findByIdAndDelete(id);
+
+      if (!deletedOrder) {
+        res.status(404).json({ message: "Данного заказа не существует" });
+      }
+
+      res.json({ message: "Заказ удален" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

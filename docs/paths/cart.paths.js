@@ -128,6 +128,50 @@ const cartPaths = {
         },
       },
     },
+    patch: {
+      summary: "Update cart item quantity",
+      tags: ["Cart"],
+      security: [{ BearerAuth: [] }],
+      parameters: [
+        {
+          name: "productId",
+          in: "path",
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
+      ],
+      requestBody: {
+        required: true,
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              required: ["quantity"],
+              properties: {
+                quantity: {
+                  type: "number",
+                  minimum: 1,
+                  example: 3,
+                },
+              },
+            },
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: "Quantity updated",
+        },
+        404: {
+          description: "Not found",
+        },
+        500: {
+          description: "Internal server error",
+        },
+      },
+    },
   },
 };
 
