@@ -42,6 +42,11 @@ const authPaths = {
                   user: {
                     $ref: "#/components/schemas/User",
                   },
+                  token: {
+                    type: "string",
+                    example:
+                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjhjZDQwZGQ4ODdiYzg3N2Q5YTA5OTQy...",
+                  },
                 },
               },
             },

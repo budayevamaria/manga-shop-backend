@@ -17,9 +17,11 @@ class AuthController {
 
       const newUser = await new User({ name, email, password: hashedPassword }).save();
 
+      const token = generateToken({ id: newUser._id });
+
       res
         .status(201)
-        .json({ message: "Новый покупатель был успешно зарегистрирован", user: newUser });
+        .json({ message: "Новый покупатель был успешно зарегистрирован", user: newUser, token });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -40,7 +42,7 @@ class AuthController {
         return res.status(400).json({ message: "Вы ввели неверный email или пароль" });
       }
 
-      const token = generateToken({ user: { id: user._id } });
+      const token = generateToken({ id: user._id });
       res.json({ token });
     } catch (error) {
       res.status(500).json({ error: error.message });

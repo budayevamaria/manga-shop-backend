@@ -10,7 +10,7 @@ export function requireAuth(req, res, next) {
 
   try {
     const decoded = verifyToken(token);
-    req.userId = decoded.user.id;
+    req.userId = decoded.id;
     next();
   } catch (error) {
     return res.status(401).json({ message: "Невалидный токен" });
