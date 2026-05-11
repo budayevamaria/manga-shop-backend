@@ -53,7 +53,7 @@ class OrderController {
         return res.status(404).json({ message: "Заказ не найден" });
       }
 
-      if (order.user.toString() !== req.userId) {
+      if (order.user._id.toString() !== req.userId) {
         return res.status(403).json({ message: "Доступ запрещен" });
       }
 
