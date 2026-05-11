@@ -35,7 +35,9 @@ class OrderController {
 
   async getAll(req, res) {
     try {
-      const orders = await Order.find({ user: req.userId }).populate("items.product");
+      const orders = await Order.find({ user: req.userId })
+        .populate("user")
+        .populate("items.product");
 
       res.json(orders);
     } catch (error) {
@@ -45,7 +47,7 @@ class OrderController {
 
   async getById(req, res) {
     try {
-      const order = await Order.findById(req.params.id).populate("items.product");
+      const order = await Order.findById(req.params.id).populate("user").populate("items.product");
 
       if (!order) {
         return res.status(404).json({ message: "Заказ не найден" });
@@ -69,7 +71,7 @@ class OrderController {
       const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
 
       if (!order) {
-        return res.status(404).json({ message: "Order not found" });
+        return res.status(404).json({ message: "Заказ не найден" });
       }
 
       res.json({ message: "Статус заказа обновлен" });
