@@ -10,8 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    origin: ["http://localhost:5173", "https://mangashop-f.vercel.app"],
     credentials: true,
   })
 );
