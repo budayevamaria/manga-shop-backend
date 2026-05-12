@@ -8,16 +8,7 @@ const PORT = 4000;
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://mangashop-f.vercel.app",
-      "https://manga-shop-frontend.vercel.app",
-    ],
-    credentials: true,
-  })
-);
+app.use(cors({ origin: true, credentials: true }));
 app.use("/", appRoutes);
 
 app.listen(PORT, async () => {
