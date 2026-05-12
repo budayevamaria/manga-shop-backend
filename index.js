@@ -13,7 +13,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://mangashop-f.vercel.app",
-      "https://manga-shop-frontend.vercel.app/",
+      "https://manga-shop-frontend.vercel.app",
     ],
     credentials: true,
   })
