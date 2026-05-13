@@ -4,7 +4,6 @@ import { createValidatorMiddleware } from "../middlewares/validator.middleware.j
 const title = body("title")
   .exists()
   .withMessage("Поле 'title' обязательно")
-  .isString()
   .withMessage("Поле 'title' должно быть строкой")
   .isLength({ min: 2 })
   .withMessage("Поле 'title' должно содержать минимум 2 символа");
